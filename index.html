@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FinTech Summit 2026 – Registration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       CSS CUSTOM PROPERTIES — ANTIGRAVITY THEME
+    ============================================================ */
+    :root {
+      --green-primary:   #00e676;
+      --green-mid:       #00c853;
+      --green-dark:      #007c39;
+      --green-glow:      rgba(0, 230, 118, 0.35);
+      --green-glow-soft: rgba(0, 230, 118, 0.12);
+      --bg-void:         #050a0f;
+      --bg-deep:         #080f17;
+      --bg-card:         rgba(8, 20, 35, 0.65);
+      --bg-card-hover:   rgba(10, 26, 45, 0.75);
+      --bg-input:        rgba(0, 230, 118, 0.05);
+      --bg-input-focus:  rgba(0, 230, 118, 0.10);
+      --border-subtle:   rgba(0, 230, 118, 0.18);
+      --border-active:   rgba(0, 230, 118, 0.70);
+      --text-primary:    #e8f5e9;
+      --text-secondary:  #90a4ae;
+      --text-label:      #b2dfdb;
+      --text-hint:       #607d8b;
+      --shadow-float:    0 8px 32px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.4);
+      --shadow-glow:     0 0 20px var(--green-glow), 0 0 60px rgba(0,230,118,0.10);
+      --shadow-hover:    0 16px 48px rgba(0,0,0,0.7), 0 4px 16px rgba(0,0,0,0.5), 0 0 30px var(--green-glow);
+      --blur-glass:      blur(18px) saturate(180%);
+      --radius-card:     20px;
+      --radius-input:    12px;
+      --radius-btn:      14px;
+      --transition:      all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-void);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+      /* Animated deep space grid background */
+      background-image:
+        radial-gradient(ellipse at 20% 50%, rgba(0,100,50,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(0,150,80,0.06) 0%, transparent 40%),
+        radial-gradient(ellipse at 60% 80%, rgba(0,80,40,0.07) 0%, transparent 45%),
+        linear-gradient(rgba(0,230,118,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,230,118,0.03) 1px, transparent 1px);
+      background-size: auto, auto, auto, 60px 60px, 60px 60px;
+    }
+
+    /* ============================================================
+       FLOATING PARTICLES CANVAS
+    ============================================================ */
+    #particles-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    /* ============================================================
+       PAGE WRAPPER
+    ============================================================ */
+    .page-wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 24px 16px 60px;
+    }
+
+    /* ============================================================
+       BANNER
+    ============================================================ */
+    .banner-wrap {
+      border-radius: 20px 20px 0 0;
+      overflow: hidden;
+      box-shadow: var(--shadow-float), var(--shadow-glow);
+      margin-bottom: -4px;
+      position: relative;
+    }
+    .banner-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 60%, var(--bg-void) 100%);
+      pointer-events: none;
+    }
+    .banner-wrap img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* ============================================================
+       GLASS CARD — MAIN FORM CONTAINER
+    ============================================================ */
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: var(--blur-glass);
+      -webkit-backdrop-filter: var(--blur-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 0 0 var(--radius-card) var(--radius-card);
+      padding: 48px 52px 52px;
+      box-shadow: var(--shadow-float);
+      animation: float 6s ease-in-out infinite;
+      position: relative;
+      overflow: hidden;
+    }
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--green-primary), transparent);
+      opacity: 0.6;
+    }
+    /* Subtle corner glow accent */
+    .glass-card::after {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 220px; height: 220px;
+      background: radial-gradient(circle, rgba(0,230,118,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px);   box-shadow: var(--shadow-float); }
+      50%       { transform: translateY(-8px);  box-shadow: var(--shadow-hover); }
+    }
+
+    /* ============================================================
+       HEADER INSIDE CARD
+    ============================================================ */
+    .form-header { margin-bottom: 36px; }
+
+    .form-header h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(1.3rem, 4vw, 1.85rem);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--green-primary);
+      text-shadow: 0 0 20px var(--green-glow), 0 0 40px rgba(0,230,118,0.2);
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+
+    .form-header p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+
+    .required-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--green-primary);
+      background: rgba(0,230,118,0.08);
+      border: 1px solid rgba(0,230,118,0.2);
+      border-radius: 20px;
+      padding: 4px 12px;
+      margin-top: 6px;
+    }
+    .required-note::before {
+      content: '✦';
+      font-size: 0.65rem;
+    }
+
+    /* ============================================================
+       DIVIDER
+    ============================================================ */
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+      margin: 32px 0;
+    }
+
+    /* ============================================================
+       SECTION LABELS
+    ============================================================ */
+    .form-section-label {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green-dark);
+      color: #2e7d52;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .form-section-label::before {
+      content: '';
+      width: 24px; height: 2px;
+      background: linear-gradient(90deg, var(--green-primary), transparent);
+      border-radius: 2px;
+    }
+
+    /* ============================================================
+       FORM GROUPS
+    ============================================================ */
+    .form-group {
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    .form-group label,
+    .form-group .field-label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-label);
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+      transition: color 0.25s;
+    }
+    .form-group:focus-within label,
+    .form-group:focus-within .field-label {
+      color: var(--green-primary);
+    }
+
+    .field-hint {
+      font-size: 0.75rem;
+      color: var(--text-hint);
+      margin-top: -4px;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .required-star {
+      color: var(--green-primary);
+      margin-left: 3px;
+      font-size: 0.9em;
+      text-shadow: 0 0 8px var(--green-glow);
+    }
+
+    /* ============================================================
+       INPUTS & TEXTAREA
+    ============================================================ */
+    .form-input {
+      width: 100%;
+      padding: 14px 18px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-input);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: var(--transition);
+      appearance: none;
+    }
+    .form-input::placeholder { color: var(--text-hint); font-style: italic; }
+    .form-input:hover {
+      border-color: rgba(0,230,118,0.35);
+      background: rgba(0,230,118,0.07);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .form-input:focus {
+      border-color: var(--border-active);
+      background: var(--bg-input-focus);
+      box-shadow: 0 0 0 3px rgba(0,230,118,0.15), 0 4px 20px rgba(0,0,0,0.4), 0 0 16px rgba(0,230,118,0.12);
+      transform: translateY(-2px);
+    }
+    .form-input:focus::placeholder { opacity: 0.4; }
+
+    /* ============================================================
+       SELECT (CUSTOM DROPDOWN)
+    ============================================================ */
+    .select-wrapper {
+      position: relative;
+    }
+    .select-wrapper::after {
+      content: '';
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 10px; height: 6px;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      background: var(--green-primary);
+      pointer-events: none;
+      transition: var(--transition);
+    }
+    .select-wrapper:focus-within::after { transform: translateY(-50%) rotate(180deg); }
+    select.form-input { cursor: pointer; padding-right: 44px; }
+    select.form-input option {
+      background: #0d1f2d;
+      color: var(--text-primary);
+    }
+    select.form-input option:disabled { color: var(--text-hint); }
+
+    /* ============================================================
+       GRID LAYOUT (2-COL ON DESKTOP)
+    ============================================================ */
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 24px;
+    }
+
+    /* ============================================================
+       RADIO BUTTONS — CUSTOM PILL STYLE
+    ============================================================ */
+    .radio-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 4px;
+    }
+    .radio-option { position: relative; }
+    .radio-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0; height: 0;
+    }
+    .radio-option label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: rgba(0,230,118,0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: var(--transition);
+      user-select: none;
+      margin-bottom: 0;
+    }
+    .radio-option label::before {
+      content: '';
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      border: 2px solid var(--border-subtle);
+      background: transparent;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+    .radio-option label:hover {
+      border-color: rgba(0,230,118,0.4);
+      color: var(--text-primary);
+      background: rgba(0,230,118,0.08);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+    }
+    .radio-option input[type="radio"]:checked + label {
+      border-color: var(--green-primary);
+      color: var(--green-primary);
+      background: rgba(0,230,118,0.12);
+      box-shadow: 0 0 0 2px rgba(0,230,118,0.2), 0 4px 14px rgba(0,0,0,0.3);
+    }
+    .radio-option input[type="radio"]:checked + label::before {
+      border-color: var(--green-primary);
+      background: var(--green-primary);
+      box-shadow: 0 0 6px var(--green-glow);
+    }
+    .radio-option input[type="radio"]:focus + label {
+      outline: 2px solid rgba(0,230,118,0.4);
+      outline-offset: 2px;
+    }
+
+    /* ============================================================
+       FAMILIARITY SCALE — LINEAR SELECTOR
+    ============================================================ */
+    .scale-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .scale-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      color: var(--text-hint);
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+    .scale-labels span:last-child { text-align: right; }
+    .scale-options {
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+    }
+    .scale-option { flex: 1; position: relative; }
+    .scale-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0; height: 0;
+    }
+    .scale-option label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 46px;
+      background: rgba(0,230,118,0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      font-family: 'Orbitron', monospace;
+      transition: var(--transition);
+      user-select: none;
+      margin-bottom: 0;
+    }
+    .scale-option label:hover {
+      border-color: rgba(0,230,118,0.4);
+      color: var(--green-primary);
+      background: rgba(0,230,118,0.10);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.35), 0 0 10px rgba(0,230,118,0.15);
+    }
+    .scale-option input[type="radio"]:checked + label {
+      border-color: var(--green-primary);
+      color: var(--bg-void);
+      background: linear-gradient(135deg, var(--green-primary), var(--green-mid));
+      box-shadow: 0 0 16px var(--green-glow), 0 4px 12px rgba(0,0,0,0.4);
+      transform: translateY(-4px);
+    }
+    .scale-option input[type="radio"]:focus + label {
+      outline: 2px solid rgba(0,230,118,0.5);
+      outline-offset: 2px;
+    }
+
+    /* ============================================================
+       CHECKBOXES — CUSTOM TOGGLE CHIPS
+    ============================================================ */
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      grid-auto-rows: 1fr;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .checkbox-option {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .checkbox-option input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      width: 0; height: 0;
+    }
+    .checkbox-option label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 14px;
+      background: rgba(0,230,118,0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.84rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: var(--transition);
+      user-select: none;
+      margin-bottom: 0;
+      height: 100%;
+      flex-grow: 1;
+    }
+    /* Custom checkbox box */
+    .checkbox-option label::before {
+      content: '';
+      width: 18px; height: 18px;
+      min-width: 18px;
+      border-radius: 5px;
+      border: 2px solid var(--border-subtle);
+      background: transparent;
+      transition: var(--transition);
+      position: relative;
+    }
+    /* Checkmark via ::after pseudo on the label — use sibling trick with JS */
+    .checkbox-option label:hover {
+      border-color: rgba(0,230,118,0.35);
+      color: var(--text-primary);
+      background: rgba(0,230,118,0.07);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    }
+    .checkbox-option input[type="checkbox"]:checked + label {
+      border-color: var(--green-primary);
+      color: var(--green-primary);
+      background: rgba(0,230,118,0.11);
+      box-shadow: 0 0 0 1px rgba(0,230,118,0.2);
+    }
+    .checkbox-option input[type="checkbox"]:checked + label::before {
+      background: var(--green-primary);
+      border-color: var(--green-primary);
+      box-shadow: 0 0 8px var(--green-glow);
+      /* checkmark */
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23050a0f' d='M13.5 3L6 10.5 2.5 7 1 8.5l5 5 9-9z'/%3E%3C/svg%3E");
+      background-size: 12px 12px;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    .checkbox-option input[type="checkbox"]:focus + label {
+      outline: 2px solid rgba(0,230,118,0.4);
+      outline-offset: 2px;
+    }
+
+    /* ============================================================
+       FIELDSET CONTAINER
+    ============================================================ */
+    .field-group-box {
+      background: rgba(0,230,118,0.02);
+      border: 1px solid rgba(0,230,118,0.10);
+      border-radius: 16px;
+      padding: 20px 20px 16px;
+    }
+    .field-group-box legend,
+    .field-group-box .field-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-label);
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    /* ============================================================
+       SUBMIT BUTTON
+    ============================================================ */
+    .btn-row {
+      display: flex;
+      gap: 14px;
+      margin-top: 40px;
+      align-items: center;
+    }
+
+    .btn-submit {
+      flex: 1;
+      padding: 16px 32px;
+      background: linear-gradient(135deg, var(--green-primary) 0%, var(--green-mid) 100%);
+      border: none;
+      border-radius: var(--radius-btn);
+      color: #050a0f;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,230,118,0.3), 0 2px 8px rgba(0,0,0,0.4);
+    }
+    .btn-submit::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .btn-submit:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,230,118,0.45), 0 4px 16px rgba(0,0,0,0.5), 0 0 40px rgba(0,230,118,0.2);
+    }
+    .btn-submit:hover::before { opacity: 1; }
+    .btn-submit:active { transform: translateY(-1px); }
+    .btn-submit:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+    }
+    /* Ripple effect */
+    .btn-submit .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.35);
+      transform: scale(0);
+      animation: ripple-anim 0.55s linear;
+      pointer-events: none;
+    }
+    @keyframes ripple-anim {
+      to { transform: scale(4); opacity: 0; }
+    }
+
+    .btn-reset {
+      padding: 16px 22px;
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-btn);
+      color: var(--text-secondary);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+    .btn-reset:hover {
+      border-color: rgba(0,230,118,0.4);
+      color: var(--green-primary);
+      background: rgba(0,230,118,0.05);
+      transform: translateY(-2px);
+    }
+
+    /* ============================================================
+       STATUS MESSAGE
+    ============================================================ */
+    #statusMsg {
+      margin-top: 24px;
+      padding: 0;
+      font-size: 0.9rem;
+      font-weight: 500;
+      min-height: 28px;
+      transition: var(--transition);
+    }
+    #statusMsg.success {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 20px;
+      background: rgba(0,230,118,0.10);
+      border: 1px solid rgba(0,230,118,0.35);
+      border-radius: 12px;
+      color: var(--green-primary);
+      box-shadow: 0 0 20px rgba(0,230,118,0.10);
+    }
+    #statusMsg.error {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 20px;
+      background: rgba(244,67,54,0.08);
+      border: 1px solid rgba(244,67,54,0.30);
+      border-radius: 12px;
+      color: #ef9a9a;
+    }
+    #statusMsg.sending {
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .site-footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.75rem;
+      color: var(--text-hint);
+      letter-spacing: 0.04em;
+    }
+    .site-footer span {
+      color: var(--green-dark);
+      color: #2e7d52;
+    }
+
+    /* ============================================================
+       GLOW PULSE ANIMATION FOR HEADER
+    ============================================================ */
+    @keyframes glow-pulse {
+      0%, 100% { text-shadow: 0 0 16px var(--green-glow), 0 0 32px rgba(0,230,118,0.15); }
+      50%       { text-shadow: 0 0 28px var(--green-glow), 0 0 56px rgba(0,230,118,0.28), 0 0 80px rgba(0,230,118,0.10); }
+    }
+    .form-header h1 { animation: glow-pulse 4s ease-in-out infinite; }
+
+    /* ============================================================
+       SCROLL REVEAL — FADE IN FROM BELOW
+    ============================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 620px) {
+      .glass-card { padding: 32px 22px 40px; }
+      .form-grid-2 { grid-template-columns: 1fr; gap: 0; }
+      .checkbox-grid { grid-template-columns: 1fr 1fr; }
+      .scale-options { gap: 6px; }
+      .scale-option label { height: 40px; font-size: 0.88rem; }
+      .btn-row { flex-direction: column; }
+      .btn-reset { width: 100%; text-align: center; }
+    }
+    @media (max-width: 400px) {
+      .checkbox-grid { grid-template-columns: 1fr; }
+      .radio-group { flex-direction: column; }
+    }
+
+    /* ============================================================
+       SCROLLBAR STYLING
+    ============================================================ */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-void); }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0,230,118,0.25);
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(0,230,118,0.45); }
+
+    /* ============================================================
+       SELECTION
+    ============================================================ */
+    ::selection { background: rgba(0,230,118,0.25); color: var(--green-primary); }
+  </style>
+</head>
+<body>
+
+  <!-- Floating particles canvas -->
+  <canvas id="particles-canvas"></canvas>
+
+  <div class="page-wrapper">
+
+    <!-- ── Banner ─────────────────────────────────────────── -->
+    <div class="banner-wrap reveal">
+      <img src="p001.png" alt="FinTech Summit 2026 Banner">
+    </div>
+
+    <!-- ── Glass Form Card ────────────────────────────────── -->
+    <div class="glass-card reveal">
+
+      <!-- Header -->
+      <div class="form-header">
+        <h1>FinTech Summit 2026<br>Registration Form</h1>
+        <p>
+          Welcome to FinTech Summit 2026, organized by the Finance Students' Society of the
+          University of Moratuwa in collaboration with universities and industry partners.
+          This national-level event focuses on innovation, digital finance, entrepreneurship,
+          and emerging financial technologies. Please complete the following form to register.
+        </p>
+        <span class="required-note">Fields marked with * are required</span>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- ── FORM ─────────────────────────────────────────── -->
+      <form id="registrationForm" novalidate>
+
+        <!-- PERSONAL DETAILS -->
+        <p class="form-section-label">Personal Details</p>
+
+        <div class="form-grid-2">
+          <!-- Full Name -->
+          <div class="form-group reveal">
+            <label for="full_name">Full Name <span class="required-star">*</span></label>
+            <input class="form-input" type="text" id="full_name" name="full_name"
+                   placeholder="e.g. Kavindu Jayasinghe" required autocomplete="name">
+          </div>
+
+          <!-- Name with Initials -->
+          <div class="form-group reveal">
+            <label for="name_initials">Name with Initials <span class="required-star">*</span></label>
+            <input class="form-input" type="text" id="name_initials" name="name_initials"
+                   placeholder="e.g. K.A. Jayasinghe" required>
+          </div>
+        </div>
+
+        <!-- University / School / Institute -->
+        <div class="form-group reveal">
+          <label for="institute">Name of the University / School / Institute <span class="required-star">*</span></label>
+          <input class="form-input" type="text" id="institute" name="institute"
+                 placeholder="Your institution name" required autocomplete="organization">
+        </div>
+
+        <div class="form-grid-2">
+          <!-- District -->
+          <div class="form-group reveal">
+            <label for="district">District <span class="required-star">*</span></label>
+            <div class="select-wrapper">
+              <select class="form-input" id="district" name="district" required>
+                <option value="" disabled selected>Choose district</option>
+                <option value="Colombo">Colombo</option>
+                <option value="Gampaha">Gampaha</option>
+                <option value="Kalutara">Kalutara</option>
+                <option value="Kandy">Kandy</option>
+                <option value="Matale">Matale</option>
+                <option value="Nuwara Eliya">Nuwara Eliya</option>
+                <option value="Galle">Galle</option>
+                <option value="Matara">Matara</option>
+                <option value="Hambantota">Hambantota</option>
+                <option value="Jaffna">Jaffna</option>
+                <option value="Kilinochchi">Kilinochchi</option>
+                <option value="Mannar">Mannar</option>
+                <option value="Vavuniya">Vavuniya</option>
+                <option value="Mullaitivu">Mullaitivu</option>
+                <option value="Batticaloa">Batticaloa</option>
+                <option value="Ampara">Ampara</option>
+                <option value="Trincomalee">Trincomalee</option>
+                <option value="Kurunegala">Kurunegala</option>
+                <option value="Puttalam">Puttalam</option>
+                <option value="Anuradhapura">Anuradhapura</option>
+                <option value="Polonnaruwa">Polonnaruwa</option>
+                <option value="Badulla">Badulla</option>
+                <option value="Monaragala">Monaragala</option>
+                <option value="Ratnapura">Ratnapura</option>
+                <option value="Kegalle">Kegalle</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Age Group -->
+          <div class="form-group reveal">
+            <label for="age_group">Age Group <span class="required-star">*</span></label>
+            <div class="select-wrapper">
+              <select class="form-input" id="age_group" name="age_group" required>
+                <option value="" disabled selected>Choose age group</option>
+                <option value="Under 18">Under 18</option>
+                <option value="18-24">18–24</option>
+                <option value="25-34">25–34</option>
+                <option value="35+">35+</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gender -->
+        <div class="form-group reveal">
+          <span class="field-label">Gender <span class="required-star">*</span></span>
+          <div class="radio-group">
+            <div class="radio-option">
+              <input type="radio" id="gender-male" name="gender" value="Male" required>
+              <label for="gender-male">Male</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="gender-female" name="gender" value="Female">
+              <label for="gender-female">Female</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- CONTACT DETAILS -->
+        <p class="form-section-label">Contact Details</p>
+
+        <div class="form-grid-2">
+          <!-- Email -->
+          <div class="form-group reveal">
+            <label for="email">Primary Email Address <span class="required-star">*</span></label>
+            <input class="form-input" type="email" id="email" name="email"
+                   placeholder="you@example.com" required autocomplete="email">
+          </div>
+
+          <!-- WhatsApp -->
+          <div class="form-group reveal">
+            <label for="whatsapp">WhatsApp Number <span class="required-star">*</span></label>
+            <span class="field-hint">Active WhatsApp number for event communication</span>
+            <input class="form-input" type="tel" id="whatsapp" name="whatsapp"
+                   placeholder="+94 7X XXX XXXX" required autocomplete="tel">
+          </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- INTERESTS & EXPECTATIONS -->
+        <p class="form-section-label">Interests &amp; Profile</p>
+
+        <!-- Primary Interest Areas -->
+        <div class="form-group reveal">
+          <span class="field-label">Which areas are you primarily interested in? <span class="required-star">*</span></span>
+          <div class="field-group-box">
+            <div class="checkbox-grid">
+              <div class="checkbox-option">
+                <input type="checkbox" id="int-finance" name="interests" value="Finance">
+                <label for="int-finance">Finance</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="int-banking" name="interests" value="Banking">
+                <label for="int-banking">Banking</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="int-fintech" name="interests" value="FinTech">
+                <label for="int-fintech">FinTech</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="int-investment" name="interests" value="Investment">
+                <label for="int-investment">Investment</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="int-stock" name="interests" value="Stock Market">
+                <label for="int-stock">Stock Market</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="int-payments" name="interests" value="Digital Payments">
+                <label for="int-payments">Digital Payments</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="int-entrepreneurship" name="interests" value="Entrepreneurship">
+                <label for="int-entrepreneurship">Entrepreneurship</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="int-business" name="interests" value="Business &amp; Management">
+                <label for="int-business">Business &amp; Management</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="int-economics" name="interests" value="Economics">
+                <label for="int-economics">Economics</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="int-it" name="interests" value="Information Technology">
+                <label for="int-it">Information Technology</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="int-other" name="interests" value="Other">
+                <label for="int-other">Other</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Familiarity Scale -->
+        <div class="form-group reveal">
+          <span class="field-label">How familiar are you with FinTech? <span class="required-star">*</span></span>
+          <div class="field-group-box">
+            <div class="scale-wrapper">
+              <div class="scale-options">
+                <div class="scale-option">
+                  <input type="radio" id="fam-1" name="familiarity" value="1" required>
+                  <label for="fam-1">1</label>
+                </div>
+                <div class="scale-option">
+                  <input type="radio" id="fam-2" name="familiarity" value="2">
+                  <label for="fam-2">2</label>
+                </div>
+                <div class="scale-option">
+                  <input type="radio" id="fam-3" name="familiarity" value="3">
+                  <label for="fam-3">3</label>
+                </div>
+                <div class="scale-option">
+                  <input type="radio" id="fam-4" name="familiarity" value="4">
+                  <label for="fam-4">4</label>
+                </div>
+                <div class="scale-option">
+                  <input type="radio" id="fam-5" name="familiarity" value="5">
+                  <label for="fam-5">5</label>
+                </div>
+              </div>
+              <div class="scale-labels">
+                <span>🌱 Beginner</span>
+                <span>Highly Knowledgeable 🚀</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Expected Gains -->
+        <div class="form-group reveal">
+          <span class="field-label">What do you expect to gain from FinTech Summit 2026? <span class="required-star">*</span></span>
+          <div class="field-group-box">
+            <div class="checkbox-grid">
+              <div class="checkbox-option">
+                <input type="checkbox" id="exp-knowledge" name="expectations" value="Knowledge about FinTech">
+                <label for="exp-knowledge">Knowledge about FinTech</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="exp-insights" name="expectations" value="Industry Insights">
+                <label for="exp-insights">Industry Insights</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="exp-networking" name="expectations" value="Networking opportunities">
+                <label for="exp-networking">Networking opportunities</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="exp-career" name="expectations" value="Career opportunities">
+                <label for="exp-career">Career opportunities</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="exp-entrepreneurship" name="expectations" value="Entrepreneurship knowledge">
+                <label for="exp-entrepreneurship">Entrepreneurship knowledge</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="exp-investment" name="expectations" value="Investment knowledge">
+                <label for="exp-investment">Investment knowledge</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="exp-exposure" name="expectations" value="Exposure to industry professionals">
+                <label for="exp-exposure">Industry professionals exposure</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="exp-technology" name="expectations" value="New technology awareness">
+                <label for="exp-technology">New technology awareness</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="exp-other" name="expectations" value="Other">
+                <label for="exp-other">Other</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- HOW DID YOU HEAR -->
+        <p class="form-section-label">Discovery</p>
+
+        <div class="form-group reveal">
+          <span class="field-label">How Did You Hear About Us? <span class="required-star">*</span></span>
+          <div class="field-group-box">
+            <div class="checkbox-grid">
+              <div class="checkbox-option">
+                <input type="checkbox" id="src-fb" name="source" value="Facebook">
+                <label for="src-fb">Facebook</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="src-li" name="source" value="LinkedIn">
+                <label for="src-li">LinkedIn</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="src-tt" name="source" value="TikTok">
+                <label for="src-tt">TikTok</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="src-ig" name="source" value="Instagram">
+                <label for="src-ig">Instagram</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="src-wa" name="source" value="WhatsApp">
+                <label for="src-wa">WhatsApp</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="src-fac" name="source" value="University / Faculty">
+                <label for="src-fac">University / Faculty</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="src-soc" name="source" value="University Student Society">
+                <label for="src-soc">Student Society</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="src-poster" name="source" value="Poster / Banner">
+                <label for="src-poster">Poster / Banner</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="src-other" name="source" value="Other">
+                <label for="src-other">Other</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="btn-row reveal">
+          <button type="submit" class="btn-submit" id="submitBtn">
+            ⚡ Register Now
+          </button>
+          <button type="reset" class="btn-reset" id="resetBtn">Clear Form</button>
+        </div>
+
+      </form>
+
+      <!-- Status Message -->
+      <p id="statusMsg"></p>
+
+    </div><!-- /.glass-card -->
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <span>FinTech Summit 2026</span> · Finance Students' Society, University of Moratuwa
+    </footer>
+
+  </div><!-- /.page-wrapper -->
+
+
+  <script>
+    /* ============================================================
+       SHEETDB SUBMISSION LOGIC (original, preserved intact)
+    ============================================================ */
+    const SHEETDB_URL = 'https://sheetdb.io/api/v1/8etxwlx9t8mxu';
+
+    const form      = document.getElementById('registrationForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const statusMsg = document.getElementById('statusMsg');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.textContent = '⏳ Submitting…';
+
+      statusMsg.className = 'sending';
+      statusMsg.textContent = 'Sending your registration…';
+
+      const formData = new FormData(form);
+      const dataObj  = {};
+
+      // Group multiple checkboxes into comma-separated strings
+      for (let [key, value] of formData.entries()) {
+        if (dataObj[key]) {
+          dataObj[key] += ', ' + value;
+        } else {
+          dataObj[key] = value;
+        }
+      }
+
+      // Timestamp
+      dataObj['Timestamp'] = new Date().toLocaleString();
+
+      fetch(SHEETDB_URL, {
+        method:  'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ data: [dataObj] })
+      })
+      .then(response => response.json())
+      .then(() => {
+        statusMsg.className  = 'success';
+        statusMsg.innerHTML  = '✅ Thank you! Your registration has been submitted successfully.';
+        submitBtn.disabled   = false;
+        submitBtn.textContent = '⚡ Register Now';
+        form.reset();
+      })
+      .catch(() => {
+        statusMsg.className  = 'error';
+        statusMsg.innerHTML  = '⚠️ Error submitting form. Please check your connection and try again.';
+        submitBtn.disabled   = false;
+        submitBtn.textContent = '⚡ Register Now';
+      });
+    });
+
+    /* ============================================================
+       SUBMIT BUTTON — RIPPLE EFFECT
+    ============================================================ */
+    submitBtn.addEventListener('click', function(e) {
+      const btn    = this;
+      const circle = document.createElement('span');
+      const d      = Math.max(btn.clientWidth, btn.clientHeight);
+      const r      = btn.getBoundingClientRect();
+      circle.className = 'ripple';
+      circle.style.cssText = `width:${d}px;height:${d}px;left:${e.clientX-r.left-d/2}px;top:${e.clientY-r.top-d/2}px`;
+      btn.appendChild(circle);
+      setTimeout(() => circle.remove(), 600);
+    });
+
+    /* ============================================================
+       SCROLL REVEAL
+    ============================================================ */
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer  = new IntersectionObserver(entries => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 60);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    revealEls.forEach(el => observer.observe(el));
+
+    /* ============================================================
+       FLOATING PARTICLES
+    ============================================================ */
+    (function() {
+      const canvas = document.getElementById('particles-canvas');
+      const ctx    = canvas.getContext('2d');
+      let W, H, particles;
+
+      const COLORS = ['rgba(0,230,118,', 'rgba(0,200,100,', 'rgba(0,150,70,'];
+
+      function resize() {
+        W = canvas.width  = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+      }
+
+      function createParticles(n) {
+        return Array.from({ length: n }, () => ({
+          x:   Math.random() * W,
+          y:   Math.random() * H,
+          r:   Math.random() * 1.8 + 0.4,
+          vx:  (Math.random() - 0.5) * 0.4,
+          vy:  (Math.random() - 0.5) * 0.4,
+          a:   Math.random() * 0.6 + 0.1,
+          col: COLORS[Math.floor(Math.random() * COLORS.length)]
+        }));
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        particles.forEach(p => {
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+          if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = p.col + p.a + ')';
+          ctx.fill();
+        });
+        requestAnimationFrame(draw);
+      }
+
+      resize();
+      particles = createParticles(120);
+      draw();
+      window.addEventListener('resize', () => { resize(); });
+    })();
+  </script>
+
+</body>
+</html>
