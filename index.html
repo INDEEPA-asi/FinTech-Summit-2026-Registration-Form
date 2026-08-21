@@ -1093,72 +1093,50 @@
 
 
   <script>
-    /* ============================================================
-       SHEETDB SUBMISSION LOGIC (original, preserved intact)
-    ============================================================ */
-    const SHEETDB_URL = 'https://sheetdb.io/api/v1/8etxwlx9t8mxu';
+/* ============================================================
+   GOOGLE APPS SCRIPT SUBMISSION LOGIC
+============================================================ */
+// --- PUT YOUR GOOGLE APPS SCRIPT WEB APP URL HERE ---
+const SCRIPT_URL = 'YOUR_GOOGLE_WEB_APP_URL_HERE';
 
-    const form      = document.getElementById('registrationForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const statusMsg = document.getElementById('statusMsg');
+const form      = document.getElementById('registrationForm');
+const submitBtn = document.getElementById('submitBtn');
+const statusMsg = document.getElementById('statusMsg');
 
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      submitBtn.disabled = true;
-      submitBtn.textContent = '⏳ Submitting…';
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  submitBtn.disabled = true;
+  submitBtn.textContent = '⏳ Submitting…';
 
-      statusMsg.className = 'sending';
-      statusMsg.textContent = 'Sending your registration…';
+  statusMsg.className = 'sending';
+  statusMsg.textContent = 'Sending your registration…';
 
-      const formData = new FormData(form);
-      const dataObj  = {};
+  // Send the raw FormData directly to Apps Script
+  fetch(SCRIPT_URL, {
+    method: 'POST',
+    body: new FormData(form)
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.result === "success") {
+      statusMsg.className  = 'success';
+      statusMsg.innerHTML  = '✅ Thank you! Your registration has been submitted successfully.';
+      submitBtn.disabled   = false;
+      submitBtn.textContent = '⚡ Register Now';
+      form.reset();
+    } else {
+      throw new Error(data.error);
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    statusMsg.className  = 'error';
+    statusMsg.innerHTML  = '⚠️ Error submitting form. Please check your connection and try again.';
+    submitBtn.disabled   = false;
+    submitBtn.textContent = '⚡ Register Now';
+  });
+});
 
-      // Group multiple checkboxes into comma-separated strings
-      for (let [key, value] of formData.entries()) {
-        if (dataObj[key]) {
-          dataObj[key] += ', ' + value;
-        } else {
-          dataObj[key] = value;
-        }
-      }
-
-      // Timestamp
-      dataObj['Timestamp'] = new Date().toLocaleString();
-
-      fetch(SHEETDB_URL, {
-        method:  'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body:    JSON.stringify({ data: [dataObj] })
-      })
-      .then(response => response.json())
-      .then(() => {
-        statusMsg.className  = 'success';
-        statusMsg.innerHTML  = '✅ Thank you! Your registration has been submitted successfully.';
-        submitBtn.disabled   = false;
-        submitBtn.textContent = '⚡ Register Now';
-        form.reset();
-      })
-      .catch(() => {
-        statusMsg.className  = 'error';
-        statusMsg.innerHTML  = '⚠️ Error submitting form. Please check your connection and try again.';
-        submitBtn.disabled   = false;
-        submitBtn.textContent = '⚡ Register Now';
-      });
-    });
-
-    /* ============================================================
-       SUBMIT BUTTON — RIPPLE EFFECT
-    ============================================================ */
-    submitBtn.addEventListener('click', function(e) {
-      const btn    = this;
-      const circle = document.createElement('span');
-      const d      = Math.max(btn.clientWidth, btn.clientHeight);
-      const r      = btn.getBoundingClientRect();
-      circle.className = 'ripple';
-      circle.style.cssText = `width:${d}px;height:${d}px;left:${e.clientX-r.left-d/2}px;top:${e.clientY-r.top-d/2}px`;
-      btn.appendChild(circle);
-      setTimeout(() => circle.remove(), 600);
-    });
 
     /* ============================================================
        SCROLL REVEAL
