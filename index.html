@@ -1094,47 +1094,48 @@
 
   <script>
     /* ============================================================
-       GOOGLE APPS SCRIPT SUBMISSION LOGIC
-    ============================================================ */
-    // --- PUT YOUR GOOGLE APPS SCRIPT WEB APP URL HERE ---
-    const SCRIPT_URL = https://script.google.com/macros/s/AKfycbwaNihy9tgnQFnuYyYn4nHSIFRp2PmM5PeTRhzt_ZI1BFUeUbgJdX-xS066u_7zaQ9THA/exec;
+   GOOGLE APPS SCRIPT SUBMISSION LOGIC
+============================================================ */
+// --- PUT YOUR GOOGLE APPS SCRIPT WEB APP URL HERE ---
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwaNihy9tgnQFnuYyYn4nHSIFRp2PmM5PeTRhzt_ZI1BFUeUbgJdX-xS066u_7zaQ9THA/exec';
 
-    const form      = document.getElementById('registrationForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const statusMsg = document.getElementById('statusMsg');
+const form      = document.getElementById('registrationForm');
+const submitBtn = document.getElementById('submitBtn');
+const statusMsg = document.getElementById('statusMsg');
 
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      submitBtn.disabled = true;
-      submitBtn.textContent = '⏳ Submitting…';
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  submitBtn.disabled = true;
+  submitBtn.textContent = '⏳ Submitting…';
 
-      statusMsg.className = 'sending';
-      statusMsg.textContent = 'Sending your registration…';
+  statusMsg.className = 'sending';
+  statusMsg.textContent = 'Sending your registration…';
 
-      fetch(SCRIPT_URL, {
-        method: 'POST',
-        body: new FormData(form)
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.result === "success") {
-          statusMsg.className  = 'success';
-          statusMsg.innerHTML  = '✅ Thank you! Your registration has been submitted successfully.';
-          submitBtn.disabled   = false;
-          submitBtn.textContent = '⚡ Register Now';
-          form.reset();
-        } else {
-          throw new Error(data.error);
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        statusMsg.className  = 'error';
-        statusMsg.innerHTML  = '⚠️ Error submitting form. Please check your connection and try again.';
-        submitBtn.disabled   = false;
-        submitBtn.textContent = '⚡ Register Now';
-      });
-    });
+  // Send the raw FormData directly to Apps Script
+  fetch(SCRIPT_URL, {
+    method: 'POST',
+    body: new FormData(form)
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.result === "success") {
+      statusMsg.className  = 'success';
+      statusMsg.innerHTML  = '✅ Thank you! Your registration has been submitted successfully.';
+      submitBtn.disabled   = false;
+      submitBtn.textContent = '⚡ Register Now';
+      form.reset();
+    } else {
+      throw new Error(data.error);
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    statusMsg.className  = 'error';
+    statusMsg.innerHTML  = '⚠️ Error submitting form. Please check your connection and try again.';
+    submitBtn.disabled   = false;
+    submitBtn.textContent = '⚡ Register Now';
+  });
+});
 
     /* ============================================================
        SUBMIT BUTTON — RIPPLE EFFECT
