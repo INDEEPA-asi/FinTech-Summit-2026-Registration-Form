@@ -236,59 +236,49 @@
   </footer>
 
   <script>
-    // --- PUT YOUR SHEETDB API URL HERE ---
-    const SHEETDB_URL = 'https://sheetdb.io/api/v1/8etxwlx9t8mxu'; 
+// --- PUT YOUR NEW GOOGLE APPS SCRIPT WEB APP URL HERE ---
+const SCRIPT_URL = https://script.google.com/macros/s/AKfycbwaNihy9tgnQFnuYyYn4nHSIFRp2PmM5PeTRhzt_ZI1BFUeUbgJdX-xS066u_7zaQ9THA/exec; 
 
-    const form = document.getElementById('registrationForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const statusMsg = document.getElementById('statusMsg');
+const form = document.getElementById('registrationForm');
+const submitBtn = document.getElementById('submitBtn');
+const statusMsg = document.getElementById('statusMsg');
 
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      submitBtn.disabled = true;
-      submitBtn.value = 'Submitting...';
-      statusMsg.innerText = 'Sending your registration...';
-      statusMsg.style.color = 'black';
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  
+  // Disable button and show loading state
+  submitBtn.disabled = true;
+  submitBtn.value = 'Submitting...';
+  statusMsg.innerText = 'Sending your registration...';
+  statusMsg.style.color = 'black';
 
-      const formData = new FormData(form);
-      const dataObj = {};
+  // Send the raw form data directly to Apps Script
+  fetch(SCRIPT_URL, {
+    method: 'POST',
+    body: new FormData(form)
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.result === "success") {
+      statusMsg.innerText = 'Thank you! Your registration has been submitted successfully.';
+      statusMsg.style.color = 'green';
+      form.reset();
+    } else {
+      throw new Error(data.error);
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    statusMsg.innerText = 'Error submitting form. Please check your connection and try again.';
+    statusMsg.style.color = 'red';
+  })
+  .finally(() => {
+    // Reset button state
+    submitBtn.disabled = false;
+    submitBtn.value = 'Submit';
+  });
+});
 
-      // This loop safely groups multiple checkboxes (like interests) into a single comma-separated string
-      for (let [key, value] of formData.entries()) {
-        if (dataObj[key]) {
-          dataObj[key] += ', ' + value;
-        } else {
-          dataObj[key] = value;
-        }
-      }
-
-      // Automatically add a timestamp
-      dataObj['Timestamp'] = new Date().toLocaleString();
-
-      // Send JSON payload to SheetDB
-      fetch(SHEETDB_URL, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ data: [dataObj] })
-      })
-      .then(response => response.json())
-      .then(data => {
-        statusMsg.innerText = 'Thank you! Your registration has been submitted successfully.';
-        statusMsg.style.color = 'green';
-        submitBtn.disabled = false;
-        submitBtn.value = 'Submit';
-        form.reset();
-      })
-      .catch(error => {
-        statusMsg.innerText = 'Error submitting form. Please check your connection and try again.';
-        statusMsg.style.color = 'red';
-        submitBtn.disabled = false;
-        submitBtn.value = 'Submit';
-      });
-    });
   </script>
 
 </body>
