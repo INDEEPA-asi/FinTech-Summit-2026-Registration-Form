@@ -1094,48 +1094,57 @@
 
   <script>
     /* ============================================================
-   GOOGLE APPS SCRIPT SUBMISSION LOGIC
-============================================================ */
-// --- PUT YOUR GOOGLE APPS SCRIPT WEB APP URL HERE ---
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwaNihy9tgnQFnuYyYn4nHSIFRp2PmM5PeTRhzt_ZI1BFUeUbgJdX-xS066u_7zaQ9THA/exec';
+       SHEETDB SUBMISSION LOGIC (original, preserved intact)
+    ============================================================ */
+    const SHEETDB_URL = 'https://sheetdb.io/api/v1/8etxwlx9t8mxu';
 
-const form      = document.getElementById('registrationForm');
-const submitBtn = document.getElementById('submitBtn');
-const statusMsg = document.getElementById('statusMsg');
+    const form      = document.getElementById('registrationForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const statusMsg = document.getElementById('statusMsg');
 
-form.addEventListener('submit', e => {
-  e.preventDefault();
-  submitBtn.disabled = true;
-  submitBtn.textContent = '⏳ Submitting…';
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.textContent = '⏳ Submitting…';
 
-  statusMsg.className = 'sending';
-  statusMsg.textContent = 'Sending your registration…';
+      statusMsg.className = 'sending';
+      statusMsg.textContent = 'Sending your registration…';
 
-  // Send the raw FormData directly to Apps Script
-  fetch(SCRIPT_URL, {
-    method: 'POST',
-    body: new FormData(form)
-  })
-  .then(response => response.json())
-  .then(data => {
-    if (data.result === "success") {
-      statusMsg.className  = 'success';
-      statusMsg.innerHTML  = '✅ Thank you! Your registration has been submitted successfully.';
-      submitBtn.disabled   = false;
-      submitBtn.textContent = '⚡ Register Now';
-      form.reset();
-    } else {
-      throw new Error(data.error);
-    }
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    statusMsg.className  = 'error';
-    statusMsg.innerHTML  = '⚠️ Error submitting form. Please check your connection and try again.';
-    submitBtn.disabled   = false;
-    submitBtn.textContent = '⚡ Register Now';
-  });
-});
+      const formData = new FormData(form);
+      const dataObj  = {};
+
+      // Group multiple checkboxes into comma-separated strings
+      for (let [key, value] of formData.entries()) {
+        if (dataObj[key]) {
+          dataObj[key] += ', ' + value;
+        } else {
+          dataObj[key] = value;
+        }
+      }
+
+      // Timestamp
+      dataObj['Timestamp'] = new Date().toLocaleString();
+
+      fetch(SHEETDB_URL, {
+        method:  'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ data: [dataObj] })
+      })
+      .then(response => response.json())
+      .then(() => {
+        statusMsg.className  = 'success';
+        statusMsg.innerHTML  = '✅ Thank you! Your registration has been submitted successfully.';
+        submitBtn.disabled   = false;
+        submitBtn.textContent = '⚡ Register Now';
+        form.reset();
+      })
+      .catch(() => {
+        statusMsg.className  = 'error';
+        statusMsg.innerHTML  = '⚠️ Error submitting form. Please check your connection and try again.';
+        submitBtn.disabled   = false;
+        submitBtn.textContent = '⚡ Register Now';
+      });
+    });
 
     /* ============================================================
        SUBMIT BUTTON — RIPPLE EFFECT
